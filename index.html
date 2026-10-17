@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- Tienda generada con Harvys, asistente de e-commerce creado por el Profesor Harvey Sanabria -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emana Floral — Más que un detalle, una experiencia.</title>
+<meta name="description" content="Arreglos florales, regalos especiales, kits de café y detalles para compartir en Bogotá.">
+<meta name="generator" content="Harvys — asistente de e-commerce del Profesor Harvey Sanabria">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="anim-baja tarj-borde modo-oscuro">
+
+<!-- MODAL PAGO -->
+<div class="modal-overlay" id="modal-pago" onclick="modalClickFuera(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-head"><h3>Confirmar pago</h3><button class="modal-cerrar" onclick="cerrarModal()" aria-label="Cerrar">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-total"><span class="tl">Total a pagar</span><span class="tm" id="modal-total-monto">$0</span></div>
+      <div class="pago-metodos" id="pago-metodos"></div>
+      <div class="pago-datos" id="pago-datos">
+        <div class="pd-label">Transferir a este número</div>
+        <div class="pd-numero" id="pd-numero"></div>
+        <div class="pd-nombre" id="pd-nombre"></div>
+        <button class="btn-copiar" onclick="copiarNumero()">📋 Copiar número</button>
+      </div>
+      <div class="pasos">
+        <div class="paso"><div class="paso-num">1</div><div class="paso-txt" id="paso-1"></div></div>
+        <div class="paso"><div class="paso-num">2</div><div class="paso-txt">Toca <strong>"Confirmar y enviar"</strong> — se abre WhatsApp con tu pedido</div></div>
+        <div class="paso"><div class="paso-num">3</div><div class="paso-txt" id="paso-3"></div></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <a href="#" target="_blank" rel="noopener" class="btn-wsp" onclick="return prepararWsp(this)">✅ Confirmar y enviar por WhatsApp</a>
+      <button class="btn-seguir" onclick="cerrarModal()">← Seguir comprando</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="cerrarCarrito()"></div>
+
+<!-- VISOR DE FOTOS -->
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Foto del producto">
+  <figure class="visor-caja">
+    <button class="visor-cerrar" aria-label="Cerrar">✕</button>
+    <div class="visor-foto" id="visor-foto"><img id="visor-img" alt=""></div>
+    <figcaption><strong id="visor-nombre"></strong><span id="visor-precio"></span></figcaption>
+    <div class="visor-ayuda">Toca o haz clic en la foto para ampliarla más</div>
+  </figure>
+</div>
+
+<button class="carrito-fab" onclick="toggleCarrito()" id="fab" aria-label="Abrir carrito">🛒<span class="carrito-badge" id="badge">0</span></button>
+
+<div class="carrito-panel" id="panel-carrito">
+  <div class="panel-header"><h3>Tus detalles elegidos</h3><button class="btn-cerrar" onclick="cerrarCarrito()" aria-label="Cerrar carrito">✕</button></div>
+  <ul id="lista-carrito"></ul>
+  <div class="panel-footer">
+    <div class="total-row"><span class="total-lbl">Total</span><span class="total-monto" id="total">$0</span></div>
+    <div class="panel-btns"><button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar</button><button class="btn-pagar" onclick="pagar()">Coordinar pedido por WhatsApp</button></div>
+  </div>
+</div>
+
+<header class="hero hero-compacto">
+  <div class="hero-bg efecto-ninguno"></div>
+  <div class="hero-content">
+    <div>
+      
+      <div class="hero-badge">Flores y regalos en Bogotá</div>
+      <h1>Emana<span>Floral</span></h1>
+      <p class="hero-sub">Más que un detalle, una experiencia. Descubre arreglos florales y regalos para expresar lo que sientes.</p>
+      <a href="#catalogo" class="btn-hero">Descubrir los detalles
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <div class="hero-stats"><div class="hero-stat"><div class="num">Bogotá</div><div class="lbl">Domicilios locales</div></div><div class="hero-stat"><div class="num">2 días</div><div class="lbl">Entrega promedio</div></div><div class="hero-stat"><div class="num">A tu gusto</div><div class="lbl">Arreglos personalizados</div></div></div>
+    </div>
+    </div>
+  <div class="hero-scroll"><div></div></div>
+</header>
+
+<section class="banner-sec">
+  <div class="banner-glow"></div>
+  <div class="banner-content">
+    <div class="sec-label">Detalles que expresan</div>
+    <h2>Una forma especial de <em>estar presente</em></h2>
+    <p>Explora diseños con flores, regalos con dulces, tablas de quesos y kits de café. Tenemos domicilios en Bogotá y opción de recogida personal. Planea tu detalle con un tiempo promedio de entrega de 2 días.</p>
+    <div class="banner-chips"><span class="chip">Arreglos personalizados</span><span class="chip">Entrega en Bogotá</span><span class="chip">Recogida personal</span><span class="chip">Atención al detalle</span></div>
+  </div>
+</section>
+
+<div class="filtros-wrap" id="filtros-bar">
+  <div class="busqueda-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+    <input type="text" id="buscador" placeholder="Buscar producto..." oninput="filtrarBusqueda()">
+  </div>
+</div>
+<section class="catalogo-wrap" id="catalogo">
+  <div class="catalogo-header">
+    <div><div class="sec-label">Nuestra colección</div><div class="sec-title">Flores y regalos</div></div>
+    <div class="catalogo-count" id="cont-count"></div>
+  </div>
+  <div id="productos"></div>
+</section>
+
+<section class="beneficios-sec" id="beneficios">
+  <div class="sec-centro"><div class="sec-label">El sello Emana</div><div class="sec-title">Cada detalle cuenta</div></div>
+  <div class="beneficios-grid">
+    <div class="bcard"><div class="bcard-icono">🌷</div><h3>Más que un objeto</h3><p>Detalles pensados para brindar una experiencia especial a quien los recibe.</p></div><div class="bcard"><div class="bcard-icono">✨</div><h3>Calidad en cada detalle</h3><p>Productos de alta calidad para acompañar tus momentos especiales.</p></div><div class="bcard"><div class="bcard-icono">🎀</div><h3>Atención al detalle</h3><p>Cuidamos los detalles de cada presentación.</p></div><div class="bcard"><div class="bcard-icono">💐</div><h3>Arreglos personalizados</h3><p>Consulta por WhatsApp cómo personalizar tu arreglo floral.</p></div>
+  </div>
+</section>
+
+<section class="recs-sec">
+  <div class="sec-label">Para inspirarte</div>
+  <div class="sec-title">Detalles que enamoran</div>
+  <div class="recs-grid" id="recomendados"></div>
+</section>
+
+<section class="top-sec">
+  <div class="sec-label">Los favoritos de la comunidad</div>
+  <div class="sec-title">Detalles más votados</div>
+  <div class="top-grid" id="top"></div>
+</section>
+
+<section class="duelo-sec">
+  <div class="sec-label">Elige el detalle que te inspira</div>
+  <div class="sec-title">¿Cuál regalarías?</div>
+  <div class="duelo-arena" id="duelo"></div>
+  <p class="duelo-info">Selecciona tu favorito y ayúdalo a subir en la selección de la comunidad. Estos votos no representan ventas.</p>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-marca"><h3>Emana Floral</h3><p>Emana Floral: arreglos florales y regalos especiales en Bogotá. Domicilios locales y recogida personal.</p></div>
+    <div class="footer-col"><h4>Contacto</h4><ul><li><a href="https://wa.me/573185846022" target="_blank" rel="noopener">WhatsApp: +57 3185846022</a></li><li><a href="https://instagram.com/[POR COMPLETAR]" target="_blank" rel="noopener">Instagram: @[POR COMPLETAR]</a></li><li>📍 Bogotá</li></ul></div>
+    <div class="footer-col"><h4>Pagos</h4><ul><li>Nequi</li><li>Daviplata</li><li>Transferencia bancaria</li></ul></div>
+    <div class="footer-col"><h4>Categorías</h4><ul><li>Diseños con base</li><li>Diseños en canasto</li><li>Diseños en florero</li><li>Bouquet</li><li>Cajas florales</li><li>Regalos con dulces y flores</li><li>Tablas de quesos y aperitivos</li><li>Kits de café / Regalos especiales</li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Emana Floral — Todos los derechos reservados</span>
+    <span>Más que un detalle, una experiencia.</span>
+  </div>
+  <div class="footer-credito">
+    Creada con <strong>Harvys</strong> · Prof. Harvey Sanabria ·
+    <a href="https://wa.me/573103323843?text=Hola%20Profesor%20Harvey%2C%20vi%20una%20tienda%20creada%20con%20Harvys%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener">WhatsApp 310 332 3843</a>
+  </div>
+</footer>
+
+<!-- Copia del proyecto para volver a abrirlo en Harvys (botón "Abrir"). No la borres. -->
+<script type="application/json" id="harvys-proyecto">{"negocio":{"nombre":"Emana Floral","descripcion":"Arreglos florales, regalos especiales, kits de café y detalles para compartir en Bogotá.","eslogan":"Más que un detalle, una experiencia.","ciudad":"Bogotá","cobertura":"Domicilios en Bogotá y recogida personal. Entrega promedio: 2 días.","whatsapp":"573185846022","instagram":"[POR COMPLETAR]","facebook":"","tiktok":"","horarios":[],"logo":""},"tema":{"nombreEstilo":"Galería nocturna","modo":"oscuro","colores":{"primario":"#D9BC82","textoSobrePrimario":"#211C18","fondo":"#191715","fondoAlterno":"#24201C","tarjeta":"#2B2621","texto":"#F8F2E8","textoSuave":"#C4B7A5","acento":"#D8A99D"},"fuentes":{"titulos":"Cinzel","cuerpo":"Montserrat"},"titulosMayusculas":false,"radio":4,"animaciones":"baja","fondoEfecto":"ninguno","hero":"compacto","tarjetas":"borde"},"textos":{"heroEtiqueta":"Flores y regalos en Bogotá","heroTitulo":"Emana","heroTituloResaltado":"Floral","heroSubtitulo":"Más que un detalle, una experiencia. Descubre arreglos florales y regalos para expresar lo que sientes.","heroBoton":"Descubrir los detalles","heroImagen":"https://placehold.co/600x600/png?text=Foto+pendiente","estadisticas":[{"valor":"Bogotá","etiqueta":"Domicilios locales"},{"valor":"2 días","etiqueta":"Entrega promedio"},{"valor":"A tu gusto","etiqueta":"Arreglos personalizados"}],"bannerEtiqueta":"Detalles que expresan","bannerTitulo":"Una forma especial de","bannerTituloResaltado":"estar presente","bannerTexto":"Explora diseños con flores, regalos con dulces, tablas de quesos y kits de café. Tenemos domicilios en Bogotá y opción de recogida personal. Planea tu detalle con un tiempo promedio de entrega de 2 días.","chips":["Arreglos personalizados","Entrega en Bogotá","Recogida personal","Atención al detalle"],"catalogoEtiqueta":"Nuestra colección","catalogoTitulo":"Flores y regalos","botonAgregar":"+ Añadir a mi detalle","beneficiosEtiqueta":"El sello Emana","beneficiosTitulo":"Cada detalle cuenta","recomendadosEtiqueta":"Para inspirarte","recomendadosTitulo":"Detalles que enamoran","topEtiqueta":"Los favoritos de la comunidad","topTitulo":"Detalles más votados","dueloEtiqueta":"Elige el detalle que te inspira","dueloTitulo":"¿Cuál regalarías?","dueloInfo":"Selecciona tu favorito y ayúdalo a subir en la selección de la comunidad. Estos votos no representan ventas.","testimoniosEtiqueta":"Experiencias compartidas","testimoniosTitulo":"Historias que florecen","horariosEtiqueta":"Planea tu visita","horariosTitulo":"Nuestros horarios","footerTexto":"Emana Floral: arreglos florales y regalos especiales en Bogotá. Domicilios locales y recogida personal.","footerFrase":"Más que un detalle, una experiencia.","carritoTitulo":"Tus detalles elegidos","botonPagar":"Coordinar pedido por WhatsApp"},"productos":[{"id":"emana-01","nombre":"Amor Mamá","precio":85000,"categoria":"Diseños con base","imagen":"foto:jn3pcu","opciones":null,"destacado":true},{"id":"emana-02","nombre":"Amor Mamá Eterno","precio":95000,"categoria":"Diseños con base","imagen":"foto:bwcfav","opciones":null,"destacado":false},{"id":"emana-03","nombre":"Ana","precio":120000,"categoria":"Diseños en canasto","imagen":"foto:f6i38p","opciones":null,"destacado":true},{"id":"emana-04","nombre":"Cristal","precio":80000,"categoria":"Diseños en florero","imagen":"foto:e81m79","opciones":null,"destacado":false},{"id":"emana-05","nombre":"Mamá","precio":175000,"categoria":"Diseños en canasto","imagen":"https://placehold.co/600x600/png?text=Foto+pendiente","opciones":null,"destacado":false},{"id":"emana-06","nombre":"Bouquet","precio":90000,"categoria":"Bouquet","imagen":"foto:q6cw6r","opciones":null,"destacado":true},{"id":"emana-07","nombre":"Flower Box","precio":140000,"categoria":"Cajas florales","imagen":"foto:ef282p","opciones":null,"destacado":true},{"id":"emana-08","nombre":"Aro de oro","precio":110000,"categoria":"Regalos con dulces y flores","imagen":"foto:9t74ca","opciones":null,"destacado":false},{"id":"emana-09","nombre":"Cheese Box","precio":140000,"categoria":"Tablas de quesos y aperitivos","imagen":"foto:guguse","opciones":null,"destacado":false},{"id":"emana-10","nombre":"Caja Portaretrato (Café para Mamá)","precio":86000,"categoria":"Kits de café / Regalos especiales","imagen":"foto:n72lx7","opciones":null,"destacado":false},{"id":"emana-11","nombre":"Caja Mug Duo (Café para Mamá)","precio":98000,"categoria":"Kits de café / Regalos especiales","imagen":"https://placehold.co/600x600/png?text=Foto+pendiente","opciones":null,"destacado":false},{"id":"emana-12","nombre":"Caja Cafetera (Café para Mamá)","precio":145000,"categoria":"Kits de café / Regalos especiales","imagen":"https://placehold.co/600x600/png?text=Foto+pendiente","descripcion":"Versión sin mug adicional. También disponible con mug adicional por $154.000 como otra referencia del catálogo.","opciones":null,"destacado":false},{"id":"emana-13","nombre":"Caja Cafetera con mug adicional (Café para Mamá)","precio":154000,"categoria":"Kits de café / Regalos especiales","imagen":"https://placehold.co/600x600/png?text=Foto+pendiente","descripcion":"Versión de la Caja Cafetera con mug adicional incluido.","opciones":null,"destacado":false}],"beneficios":[{"icono":"🌷","titulo":"Más que un objeto","texto":"Detalles pensados para brindar una experiencia especial a quien los recibe."},{"icono":"✨","titulo":"Calidad en cada detalle","texto":"Productos de alta calidad para acompañar tus momentos especiales."},{"icono":"🎀","titulo":"Atención al detalle","texto":"Cuidamos los detalles de cada presentación."},{"icono":"💐","titulo":"Arreglos personalizados","texto":"Consulta por WhatsApp cómo personalizar tu arreglo floral."}],"testimonios":[],"pagos":{"metodos":[{"nombre":"Nequi","icono":"💜","tipo":"transferencia"},{"nombre":"Daviplata","icono":"🔴","tipo":"transferencia"},{"nombre":"Transferencia bancaria","icono":"🏦","tipo":"transferencia"}],"numeroTransferencia":"[POR COMPLETAR]","titular":"[POR COMPLETAR]","contraentregaDetalle":"No ofrecemos pago contraentrega."},"backend":{"url":"https://script.google.com/macros/s/AKfycbweT6WzW5Pt63isAqv1qK9r_WE-57YZAuSHRUPBLaCDova6EVT0MRxerPVjEl7Z3fAidg/exec"},"secciones":["banner","catalogo","beneficios","recomendados","top","duelo"],"personalizado":{"css":"","secciones":[]}}</script>
+<script src="script.js"></script>
+</body>
+</html>
